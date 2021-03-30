@@ -1,0 +1,53 @@
+import pygame
+import pygame.locals
+from views.game_view import GameView
+from models.snake import Snake
+from .game_over import GameOverController
+
+class GameController():
+    def __init__(self):
+        self.snake = Snake()
+        self.view = GameView(self.snake)
+
+    def run(self):
+        clock = pygame.time.Clock()
+        running = True
+
+        while running:
+            clock.tick(30)
+
+            self.view.display()
+
+            for event in pygame.event.get():
+                if event.type == pygame.locals.QUIT:
+                    running = False
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.locals.K_RIGHT:
+                        self.snake.turn("Right")
+                    elif event.key == pygame.locals.K_LEFT:
+                        self.snake.turn("Left")
+                    elif event.key == pygame.locals.K_UP:
+                        self.snake.turn("Up")
+                    elif event.key == pygame.locals.K_DOWN:
+                        self.snake.turn("Down")
+            
+            if self.snake.full_body[0].x < 0 \
+               or self.snake.full_body[0].y < 0 \
+               or self.snake.full_body[0].x > self.view.window.get_width() \
+               or self.snake.full_body[0].y > self.view.window.get_height():
+                    gameover = GameOverController()
+                    game_continue = gameover.run(self.view.window)
+                    if game_continue:
+                        self.snake = Snake()
+                        self.view = GameView(self.snake)
+                    else:
+                        running = False
+
+            self.snake.move()
+
+
+if __name__ == "__main__":
+    controller = GameController()
+    controller.run()
+
