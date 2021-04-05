@@ -11,12 +11,13 @@ class Apple(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(image, (40, 65))
         self.image.set_colorkey((255, 255, 255))
         self.rect = self.image.get_rect()
-        self.rect.x = round(random.randrange(0, 1000 - snake_block) / 10.0) * 10.0
+        self.rect.x = round(random.randrange(0, 1000) / 10.0) * 10.0
+        self.rect.y = round(random.randrange(0, 1000) / 10.0) * 10.0
 
 
     def update(self):
-        self.rect.y = round(random.randrange(0, 1000 - snake_block) / 10.0) * 10.0
-        self.rect.x = round(random.randrange(0, 1000 - snake_block) / 10.0) * 10.0
+        self.rect.y = round(random.randrange(0, 1000) / 10.0) * 10.0
+        self.rect.x = round(random.randrange(0, 1000) / 10.0) * 10.0
 
 
 class Poison(pygame.sprite.Sprite):
@@ -26,8 +27,10 @@ class Poison(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(image, (40, 65))
         self.image.set_colorkey((255, 255, 255))
         self.rect = self.image.get_rect()
-        self.rect.x = round(random.randrange(0, 1000 - snake_block) / 10.0) * 10.0
+        self.rect.x = round(random.randrange(0, 1000) / 10.0) * 10.0
+        self.rect.y = round(random.randrange(0, 1000) / 10.0) * 10.0
+
 
     def update(self):
-        self.rect.y = round(random.randrange(0, 1000 - snake_block) / 10.0) * 10.0
-        self.rect.x = round(random.randrange(0, 1000 - snake_block) / 10.0) * 10.0
+        self.rect.y = round(random.randrange(0, 1000) / 10.0) * 10.0
+        self.rect.x = round(random.randrange(0, 1000) / 10.0) * 10.0
