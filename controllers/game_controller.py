@@ -49,8 +49,8 @@ class GameController():
                     elif event.key == pygame.locals.K_DOWN:
                         self.snake.turn("Down")
 
-            apples.draw(Gameview(apples))
-            poison.draw(GameView(poison))
+            apples.draw(self.view.window)
+            poison.draw(self.view.window)
             pygame.display.update()
             
             if self.snake.full_body[0].x < 0 \
