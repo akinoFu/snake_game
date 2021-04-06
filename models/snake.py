@@ -45,6 +45,10 @@ class Snake:
         # Rotate the head
         self._head.rotate(self.direction)
 
+    @property
+    def head_position(self):
+        """ Return the head position """
+        return [self._head.x, self._head.y]
 
 class SnakePart:
     def __init__(self, x, y, size):
