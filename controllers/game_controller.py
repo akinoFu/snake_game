@@ -9,31 +9,38 @@ from .game_over import GameOverController
 class GameController():
     def __init__(self):
         self.snake = Snake()
-        # self.apple = Apple()
         self.view = GameView(self.snake)
-        # self.food = GameView(self.apple)
+        self.apple = Apple()
+        self.poison = Poison()
+
 
     def run(self):
         clock = pygame.time.Clock()
         running = True
 
-        
         apples = pygame.sprite.Group()
-        apples.add(Apple())
+        apples.add(self.apple)
 
         poison = pygame.sprite.Group()
-        poison.add(Poison())
-        # if pygame.sprite.spritecollide(snake, apple, dokill=True):
-        # score += 1
-        # score.update()
+        poison.add(self.poison)
 
         while running:
             clock.tick(30)
 
             self.view.display()
-
-            for s in [sprite for sprite in itertools.chain(apples.sprites(), poison.sprites()) if not sprite.alive()]:
-                del s
+            
+            overlap_apple = self.apple.overlap(self.snake.head_position)
+            # if overlap_apple == True:
+                # score += 1
+            overlap_snake = self.poison.overlap(self.snake.head_position)
+            if overlap_snake == True:
+                gameover = GameOverController()
+                game_continue = gameover.run(self.view.window)
+                if game_continue:
+                    self.snake = Snake()
+                    self.view = GameView(self.snake)
+                else:
+                    running = False
 
             for event in pygame.event.get():
                 if event.type == pygame.locals.QUIT:
@@ -57,7 +64,6 @@ class GameController():
                or self.snake.full_body[0].y < 0 \
                or self.snake.full_body[0].x > self.view.window.get_width() \
                or self.snake.full_body[0].y > self.view.window.get_height():
-                    gameover = GameOverController()
                     game_continue = gameover.run(self.view.window)
                     if game_continue:
                         self.snake = Snake()

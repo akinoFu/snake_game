@@ -15,6 +15,10 @@ class Snake:
         self.direction = "Left"
         self.score = 0
 
+    @property
+    def head_position(self):
+        return [self._head.x, self._head.y]
+
     def move(self):
         self._body6.x = self._body5.x
         self._body6.y = self._body5.y
@@ -45,10 +49,6 @@ class Snake:
         # Rotate the head
         self._head.rotate(self.direction)
 
-    @property
-    def head_position(self):
-        """ Return the head position """
-        return [self._head.x, self._head.y]
 
 class SnakePart:
     def __init__(self, x, y, size):
