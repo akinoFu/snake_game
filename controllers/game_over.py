@@ -19,13 +19,13 @@ class GameOverController():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     
                     x, y = pygame.mouse.get_pos()
-                    if (view.start_btn_pos[0] + view.surface_pos[0]) <= x <= (view.start_btn_pos[0] + view.surface_pos[0] + view.button_size[0]) \
-                       and (view.start_btn_pos[1] + view.surface_pos[1]) <= y <= (view.start_btn_pos[1] + view.surface_pos[1] + view.button_size[1]):
+                    if view.button_cotinue["x_start"] <= x <= view.button_cotinue["x_end"] \
+                       and view.button_cotinue["y_start"] <= y <= view.button_cotinue["y_end"] :
                         window.fill((46,139,87))
                         displaying = False
                         return True
 
-                    elif (view.end_btn_pos[0] + view.surface_pos[0]) <= x <= (view.end_btn_pos[0] + view.surface_pos[0] + view.button_size[0]) \
-                       and (view.end_btn_pos[1] + view.surface_pos[1]) <= y <= (view.end_btn_pos[1] + view.surface_pos[1] + view.button_size[1]):
+                    elif view.button_end["x_start"] <= x <= view.button_end["x_end"] \
+                       and view.button_end["y_start"] <= y <= view.button_end["y_end"] :
                         displaying = False
                         return False
