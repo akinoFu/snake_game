@@ -17,13 +17,23 @@ class Apple(pygame.sprite.Sprite):
         self.rect.y = round(random.randrange(100, 900) / 10.0) * 10.0
 
 
-    def overlap(self, snake):
+    def overlap_snake_poison(self, snake, poison):
         """ Checks to see if snake head intercepts area of apple """
         if self.rect.x <= snake[0] <= self.rect.x + 40 and self.rect.y <= snake[1] <= self.rect.y + 65:
             self.rect.y = round(random.randrange(100, 600))
             self.rect.x = round(random.randrange(100, 600))
-            return True
+        if self.rect.colliderect(poison.rect):
+            print('in loop')
+            self.rect.x += 40
+            self.rect.y += 65
+        return True
 
+
+    def overlap_snake_apple(self, snake):
+        if self.rect.x <= snake['x_min'] and snake['x_max'] <= self.rect.x + 40 and self.rect.y <= snake['y_min'] and snake['y_max'] <= self.rect.y + 65:
+            print('in snake overlap')
+            self.rect.x += 40
+            self.rect.y += 65
 
 
 class Poison(pygame.sprite.Sprite):
