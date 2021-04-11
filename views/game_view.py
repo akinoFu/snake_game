@@ -4,7 +4,7 @@ class GameView:
     def __init__(self, snake):
         pygame.init()
         pygame.font.init()
-        self.window = pygame.display.set_mode((1000, 1000))
+        self.window = pygame.display.set_mode((800, 800))
         self.snake = snake
         self.window.fill((46,139,87))
 
