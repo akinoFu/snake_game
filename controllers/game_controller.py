@@ -31,11 +31,17 @@ class GameController():
 
             self.view.display()
             
-            overlap_apple = self.apple.overlap_snake_poison(self.snake.head_position, self.poison)
-            overlap_double_check_apple = self.apple.overlap_snake_apple(self.snake.range)
+            eaten_apple = self.apple.apple_eaten(self.snake.head_position)
             # if overlap_apple == True:
                 # score += 1
-            overlap_snake = self.poison.overlap(self.snake.head_position)
+            
+            check_poison_overlap_apple = self.apple.overlap_poison_with_apple(self.poison)
+            overlap_double_check_apple = self.apple.overlap_snake_new_apple(self.snake.range)
+
+            if overlap_double_check_apple == False:
+                overlap_double_check_apple = overlap_double_check_apple(self.apple.overlap_snake_new_apple(self.snake.range))
+                
+            overlap_snake = self.poison.poison_eaten(self.snake.head_position)
             if overlap_snake == True:
                 
                 game_continue = gameover.run(self.view.window)
