@@ -51,6 +51,24 @@ class Snake:
     def head_position(self):
         return [self._head.x, self._head.y]
 
+
+    @property
+    def range(self):
+        x_min = 1000
+        y_min = 1000
+        x_max = 0
+        y_max = 0
+        for part in self.full_body:
+            if part.x < x_min:
+                x_min = part.x
+            if part.x > x_max:
+                x_max = part.x
+            if part.y < y_min:
+                y_min = part.y
+            if part.y > y_max:
+                y_max = part.y
+        return {"x_min": x_min, "x_max": x_max + self._size, "y_min": y_min, "y_max": y_max + self._size}
+
     def move(self):
         self._body6.x = self._body5.x
         self._body6.y = self._body5.y

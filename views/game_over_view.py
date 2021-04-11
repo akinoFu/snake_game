@@ -62,5 +62,7 @@ class GameOverView:
                      "y_start": self.surface_pos[1] + self._end_btn_pos[1],
                      "y_end":self.surface_pos[1] + self._end_btn_pos[1] + self._btn_size[1]
                     }
+
         return btn_range
+
 

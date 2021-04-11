@@ -25,11 +25,12 @@ class GameController():
         poison.add(self.poison)
 
         while running:
-            clock.tick(30)
+            clock.tick(20)
 
             self.view.display()
             
-            overlap_apple = self.apple.overlap(self.snake.head_position)
+            overlap_apple = self.apple.overlap_snake_poison(self.snake.head_position, self.poison)
+            overlap_double_check_apple = self.apple.overlap_snake_apple(self.snake.range)
             # if overlap_apple == True:
                 # score += 1
             overlap_snake = self.poison.overlap(self.snake.head_position)
