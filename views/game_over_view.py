@@ -10,19 +10,21 @@ class GameOverView:
         self.surface = pygame.Surface((self.width, self.height))
 
         self.surface_pos = [self._win_w * 0.1, self._win_h * 0.1]   # [x, y]  
-
+        
         self._btn_size = [self.width * 0.2, self.height * 0.2]      # [width, height]
         self._cnt_btn_pos = [self.width * 0.2, self.height * 0.7]   # [x, y]  
         self._end_btn_pos = [self.width * 0.6, self.height * 0.7]   # [x, y]  
 
         self._img = pygame.image.load("game_over.png")
+        
 
 
     def display(self):
         self.surface.fill((218, 197, 45))
+
         btn_font = pygame.font.SysFont('Ariel Rounded MT', 30)
-        
-        # Game Over Position
+
+        # Game Over position
         img_rect = self._img.get_rect(center = (self._win_w/2, self._win_h/3))
         
         # Restart button
@@ -60,4 +62,7 @@ class GameOverView:
                      "y_start": self.surface_pos[1] + self._end_btn_pos[1],
                      "y_end":self.surface_pos[1] + self._end_btn_pos[1] + self._btn_size[1]
                     }
+
         return btn_range
+
+

@@ -1,17 +1,49 @@
 import random
 import pygame
 
+class Player:
+    x = 0
+    y = 0
+    speed = 32
+    direction = 0
+
+    # def update(self):
+    #     if self.direction == 0:
+    #         self.x = self.x + self.speed
+    #     if self.direction == 1:
+    #         self.x = self.x - self.speed
+    #     if self.direction == 2:
+    #         self.y = self.y - self.speed
+    #     if self.direction == 3:
+    #         self.y = self.y + self.speed
+
+    def moveRight(self):
+        self.direction = 0
+
+    def moveLeft(self):
+        self.direction = 1
+
+    def moveUp(self):
+        self.direction = 2
+
+    def moveDown(self):
+        self.direction = 3
+
+# def Your_score(score):
+#     value = score_font.render("Your Score: " + str(score), True, yellow)
+#     dis.blit(value, [0, 0])
+
 class Snake:
     def __init__(self):
         self._size = 20
-        self._head = SnakeHead(800, 800, self._size)
+        self._head = SnakeHead(500, 500, self._size)
         self._body1 = SnakeBody(self._head.x + self._size, self._head.y, self._size)
         self._body2 = SnakeBody(self._body1.x + self._size, self._head.y, self._size)
         self._body3 = SnakeBody(self._body2.x + self._size, self._head.y, self._size)
-        self._body4 = SnakeBody(self._body3.x + self._size, self._head.y, self._size)
-        self._body5 = SnakeBody(self._body4.x + self._size, self._head.y, self._size)
-        self._body6 = SnakeBody(self._body5.x + self._size, self._head.y, self._size)
-        self.full_body = [self._head, self._body1, self._body2, self._body3, self._body4, self._body5, self._body6]
+        # self._body4 = SnakeBody(self._body3.x + self._size, self._head.y, self._size)
+        # self._body5 = SnakeBody(self._body4.x + self._size, self._head.y, self._size)
+        # self._body6 = SnakeBody(self._body5.x + self._size, self._head.y, self._size)
+        self.full_body = [self._head, self._body1, self._body2, self._body3]
         self.direction = "Left"
         self.score = 0
 
@@ -37,17 +69,15 @@ class Snake:
                 y_max = part.y
         return {"x_min": x_min, "x_max": x_max + self._size, "y_min": y_min, "y_max": y_max + self._size}
 
+
     def move(self):
-        self._body6.x = self._body5.x
-        self._body6.y = self._body5.y
-        self._body5.x = self._body4.x
-        self._body5.y = self._body4.y
-        self._body4.x = self._body3.x
-        self._body4.y = self._body3.y
-        self._body3.x = self._body2.x
-        self._body3.y = self._body2.y
-        self._body2.x = self._body1.x
-        self._body2.y = self._body1.y
+        """ Move the snake"""
+        l = len(self.full_body)
+        for i, part in enumerate(reversed(self.full_body)):
+            if i+1 < l:
+                part.x = self.full_body[l-i-2].x
+                part.y = self.full_body[l-i-2].y
+
         self._body1.x = self._head.x
         self._body1.y = self._head.y
 
@@ -66,7 +96,13 @@ class Snake:
         self.direction = direction
         # Rotate the head
         self._head.rotate(self.direction)
-
+    
+    def add_body(self):
+        """ Make the snake longer """
+        new_part = SnakeBody(self.full_body[-1].x + self._size,
+                             self.full_body[-1].y,
+                             self._size)
+        self.full_body.append(new_part)
 
 class SnakePart:
     def __init__(self, x, y, size):
