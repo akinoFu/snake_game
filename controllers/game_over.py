@@ -24,7 +24,7 @@ class GameOverController():
                      window.fill((46,139,87))
                      displaying = False
                      return True
-                    elif view.button_end["x_start"] <= x <= view.button_end["x_end"] \
+                elif view.button_end["x_start"] <= x <= view.button_end["x_end"] \
                        and view.button_end["y_start"] <= y <= view.button_end["y_end"] :
                         displaying = False
                         return False
