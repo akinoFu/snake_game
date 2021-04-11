@@ -22,6 +22,7 @@ class Apple(pygame.sprite.Sprite):
         if self.rect.x <= snake[0] <= self.rect.x + 40 and self.rect.y <= snake[1] <= self.rect.y + 65:
             self.rect.y = round(random.randrange(100, 650))
             self.rect.x = round(random.randrange(100, 650))
+            return True
     
 
     def overlap_poison_with_apple(self, poison):
