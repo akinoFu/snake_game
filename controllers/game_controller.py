@@ -24,6 +24,8 @@ class GameController():
         poison = pygame.sprite.Group()
         poison.add(self.poison)
 
+        gameover = GameOverController()
+
         while running:
             clock.tick(20)
 
@@ -35,7 +37,7 @@ class GameController():
                 # score += 1
             overlap_snake = self.poison.overlap(self.snake.head_position)
             if overlap_snake == True:
-                gameover = GameOverController()
+                
                 game_continue = gameover.run(self.view.window)
                 if game_continue:
                     self.snake = Snake()

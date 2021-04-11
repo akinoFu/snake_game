@@ -36,7 +36,7 @@ class Player:
 class Snake:
     def __init__(self):
         self._size = 20
-        self._head = SnakeHead(800, 800, self._size)
+        self._head = SnakeHead(500, 500, self._size)
         self._body1 = SnakeBody(self._head.x + self._size, self._head.y, self._size)
         self._body2 = SnakeBody(self._body1.x + self._size, self._head.y, self._size)
         self._body3 = SnakeBody(self._body2.x + self._size, self._head.y, self._size)
