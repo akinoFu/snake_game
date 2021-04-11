@@ -40,10 +40,10 @@ class Snake:
         self._body1 = SnakeBody(self._head.x + self._size, self._head.y, self._size)
         self._body2 = SnakeBody(self._body1.x + self._size, self._head.y, self._size)
         self._body3 = SnakeBody(self._body2.x + self._size, self._head.y, self._size)
-        self._body4 = SnakeBody(self._body3.x + self._size, self._head.y, self._size)
-        self._body5 = SnakeBody(self._body4.x + self._size, self._head.y, self._size)
-        self._body6 = SnakeBody(self._body5.x + self._size, self._head.y, self._size)
-        self.full_body = [self._head, self._body1, self._body2, self._body3, self._body4, self._body5, self._body6]
+        # self._body4 = SnakeBody(self._body3.x + self._size, self._head.y, self._size)
+        # self._body5 = SnakeBody(self._body4.x + self._size, self._head.y, self._size)
+        # self._body6 = SnakeBody(self._body5.x + self._size, self._head.y, self._size)
+        self.full_body = [self._head, self._body1, self._body2, self._body3]
         self.direction = "Left"
         self.score = 0
 
