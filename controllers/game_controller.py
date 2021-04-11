@@ -32,6 +32,8 @@ class GameController():
             self.view.display()
             
             eaten_apple = self.apple.apple_eaten(self.snake.head_position)
+            if eaten_apple:
+                Snake.add_body(self.snake)
             # if overlap_apple == True:
                 # score += 1
             
