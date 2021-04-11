@@ -69,17 +69,15 @@ class Snake:
                 y_max = part.y
         return {"x_min": x_min, "x_max": x_max + self._size, "y_min": y_min, "y_max": y_max + self._size}
 
+
     def move(self):
-        self._body6.x = self._body5.x
-        self._body6.y = self._body5.y
-        self._body5.x = self._body4.x
-        self._body5.y = self._body4.y
-        self._body4.x = self._body3.x
-        self._body4.y = self._body3.y
-        self._body3.x = self._body2.x
-        self._body3.y = self._body2.y
-        self._body2.x = self._body1.x
-        self._body2.y = self._body1.y
+        """ Move the snake"""
+        l = len(self.full_body)
+        for i, part in enumerate(reversed(self.full_body)):
+            if i+1 < l:
+                part.x = self.full_body[l-i-2].x
+                part.y = self.full_body[l-i-2].y
+
         self._body1.x = self._head.x
         self._body1.y = self._head.y
 
@@ -98,7 +96,13 @@ class Snake:
         self.direction = direction
         # Rotate the head
         self._head.rotate(self.direction)
-
+    
+    def add_body(self):
+        """ Make the snake longer """
+        new_part = SnakeBody(self.full_body[-1].x + self._size,
+                             self.full_body[-1].y,
+                             self._size)
+        self.full_body.append(new_part)
 
 class SnakePart:
     def __init__(self, x, y, size):
