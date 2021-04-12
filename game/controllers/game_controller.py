@@ -12,6 +12,7 @@ class GameController():
         self.view = GameView(self.snake)
         self.apple = Apple()
         self.poison = Poison()
+        self.gameover = GameOverController()
 
 
     def run(self):
@@ -23,8 +24,6 @@ class GameController():
 
         poison = pygame.sprite.Group()
         poison.add(self.poison)
-
-        gameover = GameOverController()
 
         while running:
             clock.tick(20)
@@ -46,7 +45,7 @@ class GameController():
             overlap_snake = self.poison.poison_eaten(self.snake.head_position)
             if overlap_snake == True:
                 
-                game_continue = gameover.run(self.view.window)
+                game_continue = self.gameover.run(self.view.window)
                 if game_continue:
                     self.snake = Snake()
                     self.view = GameView(self.snake)
@@ -71,11 +70,8 @@ class GameController():
             poison.draw(self.view.window)
             pygame.display.update()
             
-            if self.snake.full_body[0].x < 0 \
-               or self.snake.full_body[0].y < 0 \
-               or self.snake.full_body[0].x > self.view.window.get_width() \
-               or self.snake.full_body[0].y > self.view.window.get_height():
-                    game_continue = gameover.run(self.view.window)
+            if self.snake.check_hit_wall(self.view.window):
+                    game_continue = self.gameover.run(self.view.window)
                     if game_continue:
                         self.snake = Snake()
                         self.view = GameView(self.snake)

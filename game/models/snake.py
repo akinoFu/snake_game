@@ -104,6 +104,16 @@ class Snake:
                              self._size)
         self.full_body.append(new_part)
 
+    def check_hit_wall(self, window):
+        """ Check if the snake hits one of the four sides """
+        if self._head.x < 0 \
+               or self._head.y < 0 \
+               or self._head.x > window.get_width() \
+               or self._head.y > window.get_height():
+            return True
+        return False
+
+
 class SnakePart:
     def __init__(self, x, y, size):
         self._size = size
