@@ -15,7 +15,7 @@ class GameOverView:
         self._cnt_btn_pos = [self.width * 0.2, self.height * 0.7]   # [x, y]  
         self._end_btn_pos = [self.width * 0.6, self.height * 0.7]   # [x, y]  
 
-        self._img = pygame.image.load("game_over.png")
+        self._img = pygame.image.load("game/assets/img/game_over.png")
         
 
 

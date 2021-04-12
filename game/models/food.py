@@ -9,7 +9,7 @@ class Apple(pygame.sprite.Sprite):
     """ Apple Class that defines Snake's food that helps it grow """
     def __init__(self):
         super().__init__()
-        image = pygame.image.load('apple.png')
+        image = pygame.image.load("game/assets/img/apple.png")
         self.image = pygame.transform.scale(image, (40, 65))
         self.image.set_colorkey((255, 255, 255))
         self.rect = self.image.get_rect()
@@ -59,7 +59,7 @@ class Poison(pygame.sprite.Sprite):
     """ Poison class that defines Snake's food that kills it """
     def __init__(self):
         super().__init__()
-        image = pygame.image.load('poison.png')
+        image = pygame.image.load('game/assets/img/poison.png')
         self.image = pygame.transform.scale(image, (40, 65))
         self.image.set_colorkey((255, 255, 255))
         self.rect = self.image.get_rect()
