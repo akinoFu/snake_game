@@ -5,7 +5,7 @@ import datetime
 from .score import Score
 
 class ScoreManager:
-    def __init__(self, filename="scores.json"):
+    def __init__(self, filename="api/scores.json"):
         self._scores = list()
         self._filename = filename
 
