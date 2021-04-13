@@ -62,21 +62,21 @@ def test_overlap_with_poison_greaterthan(apple, poison):
 
 
 def test_overlap_snake_new_apple(apple, snake):
-    """ tests to see apple is in range """
+    """ tests to see apple is in range when new apple"""
     apple.rect.x = 500
     apple.rect.y = 500
     snake = snake.range
 
-    result = apple.overlap_snake_new_apple(snake)
+    apple.overlap_snake_new_apple(snake)
 
-    assert result == True
+    assert apple.rect.x in range(100, 650)
+    assert apple.rect.y in range(100, 650)
 
 
 def test_poison_init(poison):
     """ tests to see if poison x and y are set correctly """
     assert poison.rect.x in range(100, 650)
     assert poison.rect.y in range(100, 650)
-
 
 def test_poison_eaten(poison, snake):
     """ tests to see if poison has been eaten by snake """
