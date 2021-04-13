@@ -1,37 +1,6 @@
 import random
 import pygame
 
-class Player:
-    x = 0
-    y = 0
-    speed = 32
-    direction = 0
-
-    # def update(self):
-    #     if self.direction == 0:
-    #         self.x = self.x + self.speed
-    #     if self.direction == 1:
-    #         self.x = self.x - self.speed
-    #     if self.direction == 2:
-    #         self.y = self.y - self.speed
-    #     if self.direction == 3:
-    #         self.y = self.y + self.speed
-
-    def moveRight(self):
-        self.direction = 0
-
-    def moveLeft(self):
-        self.direction = 1
-
-    def moveUp(self):
-        self.direction = 2
-
-    def moveDown(self):
-        self.direction = 3
-
-# def Your_score(score):
-#     value = score_font.render("Your Score: " + str(score), True, yellow)
-#     dis.blit(value, [0, 0])
 
 class Snake:
     def __init__(self):
@@ -45,7 +14,7 @@ class Snake:
         # self._body6 = SnakeBody(self._body5.x + self._size, self._head.y, self._size)
         self.full_body = [self._head, self._body1, self._body2, self._body3]
         self.direction = "Left"
-        self.score = 0
+        # self.score = 0
 
     @property
     def head_position(self):
@@ -72,6 +41,7 @@ class Snake:
 
     def move(self):
         """ Move the snake"""
+        
         l = len(self.full_body)
         for i, part in enumerate(reversed(self.full_body)):
             if i+1 < l:
