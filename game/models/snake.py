@@ -45,7 +45,7 @@ class Snake:
         # self._body6 = SnakeBody(self._body5.x + self._size, self._head.y, self._size)
         self.full_body = [self._head, self._body1, self._body2, self._body3]
         self.direction = "Left"
-        self.score = 0
+        # self.score = 0
 
     @property
     def head_position(self):
@@ -72,6 +72,7 @@ class Snake:
 
     def move(self):
         """ Move the snake"""
+        
         l = len(self.full_body)
         for i, part in enumerate(reversed(self.full_body)):
             if i+1 < l:

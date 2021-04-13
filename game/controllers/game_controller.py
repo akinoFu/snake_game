@@ -5,6 +5,7 @@ from views.game_view import GameView
 from models.snake import Snake
 from models.food import Apple, Poison
 from .game_over import GameOverController
+from .game_start import GameStartController
 
 class GameController():
     def __init__(self):
@@ -13,6 +14,7 @@ class GameController():
         self.apple = Apple()
         self.poison = Poison()
         self.gameover = GameOverController()
+        self.gamestart= GameStartController()
 
 
     def run(self):
@@ -24,6 +26,10 @@ class GameController():
 
         poison = pygame.sprite.Group()
         poison.add(self.poison)
+
+        players_name = self.gamestart.run(self.view.window)
+        if not players_name:
+            running = False
 
         while running:
             clock.tick(20)
