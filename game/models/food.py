@@ -48,10 +48,9 @@ class Apple(pygame.sprite.Sprite):
             # checking the apple's coordinates to see if it overlaps with snake range
                 self.rect.y = round(random.randrange(100, 650))
                 self.rect.x = round(random.randrange(100, 650))
-                return True
             else:
                 overlapping = False
-                return False
+
 
 
 
