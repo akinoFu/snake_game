@@ -1,7 +1,6 @@
 import pygame
 import random
 import pygame.locals
-from game.models.snake import Snake
 
 
 class Apple(pygame.sprite.Sprite):
@@ -22,7 +21,7 @@ class Apple(pygame.sprite.Sprite):
             self.rect.y = round(random.randrange(100, 650))
             self.rect.x = round(random.randrange(100, 650))
             return True
-    
+        return False
 
     def overlap_poison_with_apple(self, poison):
         """ Checks to see if poison position overlaps apple position and changes apple position if it does """
@@ -49,8 +48,10 @@ class Apple(pygame.sprite.Sprite):
             # checking the apple's coordinates to see if it overlaps with snake range
                 self.rect.y = round(random.randrange(100, 650))
                 self.rect.x = round(random.randrange(100, 650))
+                return True
             else:
                 overlapping = False
+                return False
 
 
 
