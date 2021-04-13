@@ -1,8 +1,7 @@
-import itertools
 import pygame
 import random
 import pygame.locals
-from models.snake import Snake
+from game.models.snake import Snake
 
 
 class Apple(pygame.sprite.Sprite):
@@ -31,7 +30,7 @@ class Apple(pygame.sprite.Sprite):
             if self.rect.x + 80 < 750:
                 self.rect.x += 80
             else:
-                self.rect.x -= 95
+                self.rect.x -= 80
             if self.rect.y + 95 < 750:
                 self.rect.y += 95
             else:
@@ -39,7 +38,7 @@ class Apple(pygame.sprite.Sprite):
 
 
     def overlap_snake_new_apple(self, snake):
-        """ Checks to see if whole snake overlaps apple's coordinates, if it does, it changes apple's coordinates """
+        """ Checks to see if snake overlaps apple's coordinates, if it does, it changes apple's coordinates """
         overlapping = True
         while overlapping:
             # If the apple is in the snake range
