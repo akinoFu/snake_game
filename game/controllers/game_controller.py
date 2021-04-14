@@ -11,7 +11,7 @@ from models.player import Player
 class GameController():
     def __init__(self):
         self.snake = Snake()
-        self.view = GameView(self.snake)
+        self.view = GameView()
         self.apple = Apple()
         self.poison = Poison()
         self.gameover = GameOverController()
@@ -35,7 +35,7 @@ class GameController():
         while running:
             clock.tick(20)
 
-            self.view.display()
+            self.view.display(self.snake)
             
             eaten_apple = self.apple.apple_eaten(self.snake.head_position)
             if eaten_apple:
