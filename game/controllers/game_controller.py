@@ -6,6 +6,7 @@ from models.snake import Snake
 from models.food import Apple, Poison
 from .game_over import GameOverController
 from .game_start import GameStartController
+from models.player import Player
 
 class GameController():
     def __init__(self):
@@ -39,8 +40,8 @@ class GameController():
             eaten_apple = self.apple.apple_eaten(self.snake.head_position)
             if eaten_apple:
                 Snake.add_body(self.snake)
-            # if overlap_apple == True:
-                # score += 1
+            if overlap_apple == True:
+                score += 1
             
             check_poison_overlap_apple = self.apple.overlap_poison_with_apple(self.poison)
             overlap_double_check_apple = self.apple.overlap_snake_new_apple(self.snake.range)
