@@ -16,6 +16,12 @@ class GameView:
         pygame.display.flip()
 
 
+    def display_score(self, x, y):
+        font = pygame.font.Font('freesansbold.ttf', 32)
+        score = font.render("Score: " + str(self.score), True, (255, 255, 255))
+        self.window.blit(score, (x, y))
+
+
 if __name__ == "__main__":
     view = GameView()
 

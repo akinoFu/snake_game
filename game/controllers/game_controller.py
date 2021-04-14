@@ -14,6 +14,7 @@ class GameController():
         self.view = GameView(self.snake)
         self.apple = Apple()
         self.poison = Poison()
+        self.player = Player()
         self.gameover = GameOverController()
         self.gamestart= GameStartController()
 
@@ -40,8 +41,7 @@ class GameController():
             eaten_apple = self.apple.apple_eaten(self.snake.head_position)
             if eaten_apple:
                 Snake.add_body(self.snake)
-            if overlap_apple == True:
-                score += 1
+                Player.add_point(self.player)
             
             check_poison_overlap_apple = self.apple.overlap_poison_with_apple(self.poison)
             overlap_double_check_apple = self.apple.overlap_snake_new_apple(self.snake.range)
