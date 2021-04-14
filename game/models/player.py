@@ -2,11 +2,17 @@ import random
 import pygame
 
 class Player():
-    def init(self, name='test', score=0):
+    def __init__(self, name='test', score=0):
         self.name = name
         self.score = score
 
 
-# def Your_score(score):
-#     value = score_font.render("Your Score: " + str(score), True, yellow)
-#     dis.blit(value, [0, 0])
+    def add_point(count):
+        font = pygame.font.SysFont(None, 25)
+        text = font.render("Dodged: "+str(count), True, black)
+        if SnakeEatApple():
+        game['score'] += 1
+        
+
+add_point()
+        
