@@ -1,17 +1,19 @@
 import pytest
+
 from game.models.player import Player
-from game.models.snake import Snake
 
 @pytest.fixture
-def snake():
-    return Snake()
-
-@pytest.fixture
-def add_point():
+def player():
     return Player()
 
 
-def test_player_init(add_point):
+def test_player(player, name):
     """ Test the constructor of Player class """
-    assert name._name == name
-    assert score == score
+    player(name, score)
+    assert player.name == name
+    assert player.score == 0
+
+
+def test_add_point(player):
+    player.add_point()
+    assert player.score == 1
