@@ -16,34 +16,11 @@ class Snake:
 
     @property
     def group(self):
+        """ Return the sprite group """
         self._group.empty()
         for part in self.full_body:
             self._group.add(part)
         return self._group
-
-    @property
-    def head_position(self):
-        """ Return x and y of the head """
-        return [self._head.rect.x, self._head.rect.y]
-
-    @property
-    def range(self):
-        """ Return max and min coordinates of the whole body """
-        x_min = 1000
-        y_min = 1000
-        x_max = 0
-        y_max = 0
-        for part in self.full_body:
-            if part.rect.x < x_min:
-                x_min = part.rect.x
-            if part.rect.x > x_max:
-                x_max = part.rect.x
-            if part.rect.y < y_min:
-                y_min = part.rect.y
-            if part.rect.y > y_max:
-                y_max = part.rect.y
-        return {"x_min": x_min, "x_max": x_max + self._size, "y_min": y_min, "y_max": y_max + self._size}
-
 
     def move(self):
         """ Move the snake"""
@@ -74,7 +51,6 @@ class Snake:
 
         # Replace the full body with new body
         self.full_body = new_body
-
 
     def turn(self, direction):
         """ Change the direction """

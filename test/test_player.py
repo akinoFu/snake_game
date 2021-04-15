@@ -7,13 +7,13 @@ def player():
     return Player()
 
 
-def test_player(player, name):
+def test_player(player):
     """ Test the constructor of Player class """
-    player(name, score)
-    assert player.name == name
+    assert player.name == "test"
     assert player.score == 0
 
 
 def test_add_point(player):
+    """ Test add_point method """
     player.add_point()
     assert player.score == 1
