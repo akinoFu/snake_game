@@ -41,7 +41,6 @@ class Snake:
 
     def move(self):
         """ Move the snake"""
-        
         l = len(self.full_body)
         for i, part in enumerate(reversed(self.full_body)):
             if i+1 < l:

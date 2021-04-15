@@ -10,6 +10,7 @@ class GameView:
 
 
     def display(self, snake, apple, poison, score):
+        """ Show the game screen and objects """
         self.window.fill((46,139,87))
 
         # Snake
@@ -21,16 +22,20 @@ class GameView:
         apples.add(apple)
         
         # Poison
-        poison = pygame.sprite.Group()
-        poison.add(poison)
+        poisons = pygame.sprite.Group()
+        poisons.add(poison)
 
         apples.draw(self.window)
-        poison.draw(self.window)
+        poisons.draw(self.window)
 
         # Score
-        font = pygame.font.Font('freesansbold.ttf', 32)
+        font = pygame.font.SysFont('Ariel Rounded MT', 50)
         score_text = font.render(str(score), True, (255,255,255))
-        self.window.blit(score_text, (0, 0))
+        self.window.blit(score_text, (10, 10))
     
         pygame.display.flip()
+
+
+
+
 
