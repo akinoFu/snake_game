@@ -91,7 +91,7 @@ class GameController():
         # Send the score to the server
         self.player.post_score()
         # Show the gameover screen
-        game_continue = self.gameover.run(self.view.window)
+        game_continue = self.gameover.run(self.view.window, self.player)
         # If restarting the game, recreate snake and gameview
         if game_continue:
             self.snake = Snake()

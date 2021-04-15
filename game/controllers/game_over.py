@@ -4,10 +4,10 @@ from views.game_over_view import GameOverView
 class GameOverController():
     """ Controller to manage the game over screen """
 
-    def run(self, window):
+    def run(self, window, player):
         """ Show the game over screen """
         view = GameOverView(window)
-        view.display()
+        view.display(player)
 
         displaying = True
         while displaying:
