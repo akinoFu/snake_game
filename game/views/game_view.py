@@ -2,6 +2,7 @@ import pygame
 from models.player import Player
 
 class GameView:
+    """ GameView class displays what is seen to the player """
     def __init__(self):
         pygame.init()
         pygame.font.init()
@@ -36,7 +37,7 @@ class GameView:
 
         # Score
         font = pygame.font.SysFont('Ariel Rounded MT', 50)
-        score_text = font.render(str(score), True, (255,255,255))
+        score_text = font.render("Score: " + str(score), True, (255,255,255))
         self.window.blit(score_text, (10, 10))
     
         pygame.display.flip()

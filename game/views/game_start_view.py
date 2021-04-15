@@ -1,6 +1,7 @@
 import pygame
 
 class GameStartView:
+    """ Shows the starting page where player inputs their name """
     def __init__(self, window):
         self._window = window
         self.width = window.get_width()

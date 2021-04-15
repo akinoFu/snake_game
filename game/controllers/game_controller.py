@@ -11,6 +11,7 @@ from .game_start import GameStartController
 
 class GameController():
     def __init__(self):
+        """ Initializing what instances of classes """
         self.snake = Snake()
         self.view = GameView()
         self.apple = Apple()
@@ -23,6 +24,7 @@ class GameController():
     def run(self):
         """ Run the game """
         clock = pygame.time.Clock()
+        # Game is running
         running = True
 
         # Show start screen and get the player's name
@@ -30,6 +32,7 @@ class GameController():
         if not players_name:
             running = False
         else:
+            # assigning player name that's typed in to the player instance
             self.player.name = players_name
 
         while running:
@@ -38,18 +41,25 @@ class GameController():
             # Show the game screen
             self.view.display(self.snake, self.apple, self.poison, self.player.score)
 
+            # checking to see if snake has eaten apple
             eaten_apple = self.apple.apple_eaten(self.snake._head)
+            # if apple has been eaten, generate new apple, make snake longer, and add a point to score
             if eaten_apple:
                 self.snake.add_body()
                 self.player.add_point()
             
+            # checking to see if new apple overlaps static poison
             check_poison_overlap_apple = self.apple.overlap_poison_with_apple(self.poison)
+            # checking to see if new apple is placed under snake body, if it is, generate new apple
             overlap_double_check_apple = self.apple.overlap_snake_new_apple(self.snake.range)
 
+            # if new apple is still placed under snake body, generate new apple
             if overlap_double_check_apple == False:
                 overlap_double_check_apple = overlap_double_check_apple(self.apple.overlap_snake_new_apple(self.snake.range))
-                
+
+            # checking to see if poison has been eaten by snake
             overlap_snake = self.poison.poison_eaten(self.snake.head_position)
+            # if snake has eaten the poison
             if overlap_snake == True:
                 # Ask the player to continue
                 if not self._game_restart():
