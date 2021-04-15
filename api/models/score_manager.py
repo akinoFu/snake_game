@@ -1,6 +1,7 @@
 import json
 import os
 import datetime
+import requests
 
 from .score import Score
 
@@ -37,6 +38,11 @@ class ScoreManager:
         new_score_ins = Score(new_id, name, score)
         self._scores.append(new_score_ins)
         return True
+    
+    def get_all_scores(self):
+        """ Get all the data using api """
+        r = requests.get(f"http://localhost:5000/api/scores")
+        return r.json()
     
     def save(self):
         """ Serializes the list of scores and saves to a JSON file """
