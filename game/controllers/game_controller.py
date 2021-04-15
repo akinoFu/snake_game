@@ -23,25 +23,30 @@ class GameController():
         clock = pygame.time.Clock()
         running = True
 
-        apples = pygame.sprite.Group()
-        apples.add(self.apple)
+        # apples = pygame.sprite.Group()
+        # apples.add(self.apple)
 
-        poison = pygame.sprite.Group()
-        poison.add(self.poison)
+        # poison = pygame.sprite.Group()
+        # poison.add(self.poison)
 
         players_name = self.gamestart.run(self.view.window)
         if not players_name:
             running = False
+        else:
+            self.player.name = players_name
 
         while running:
             clock.tick(20)
 
-            self.view.display(self.snake)
+            self.X = 10
+            self.Y = 10
+
+            self.view.display(self.snake, self.apple, self.poison, self.player.score)
             
             eaten_apple = self.apple.apple_eaten(self.snake.head_position)
             if eaten_apple:
-                Snake.add_body(self.snake)
-                Player.add_point(self.player)
+                self.snake.add_body()
+                self.player.add_point()
             
             check_poison_overlap_apple = self.apple.overlap_poison_with_apple(self.poison)
             overlap_double_check_apple = self.apple.overlap_snake_new_apple(self.snake.range)
@@ -51,11 +56,11 @@ class GameController():
                 
             overlap_snake = self.poison.poison_eaten(self.snake.head_position)
             if overlap_snake == True:
-                
                 game_continue = self.gameover.run(self.view.window)
+                self.player.post_score()
                 if game_continue:
                     self.snake = Snake()
-                    self.view = GameView(self.snake)
+                    self.view = GameView()
                 else:
                     running = False
 
@@ -73,15 +78,17 @@ class GameController():
                     elif event.key == pygame.locals.K_DOWN:
                         self.snake.turn("Down")
 
-            apples.draw(self.view.window)
-            poison.draw(self.view.window)
+            # apples.draw(self.view.window)
+            # poison.draw(self.view.window)
             pygame.display.update()
             
             if self.snake.check_hit_wall(self.view.window):
                     game_continue = self.gameover.run(self.view.window)
+                    self.player.post_score()
+
                     if game_continue:
                         self.snake = Snake()
-                        self.view = GameView(self.snake)
+                        self.view = GameView()
                     else:
                         running = False
 

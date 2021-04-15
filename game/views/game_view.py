@@ -1,4 +1,5 @@
 import pygame
+from models.player import Player
 
 class GameView:
     def __init__(self):
@@ -7,25 +8,29 @@ class GameView:
         self.window = pygame.display.set_mode((800, 800))
         self.window.fill((46,139,87))
 
-    def display(self, snake):
+
+    def display(self, snake, apple, poison, score):
         self.window.fill((46,139,87))
+
+        # Snake
         for part in snake.full_body:
              self.window.blit(part.surface, (part.x, part.y))
 
+        # Apple
+        apples = pygame.sprite.Group()
+        apples.add(apple)
+        
+        # Poison
+        poison = pygame.sprite.Group()
+        poison.add(poison)
+
+        apples.draw(self.window)
+        poison.draw(self.window)
+
+        # Score
+        font = pygame.font.Font('freesansbold.ttf', 32)
+        score_text = font.render(str(score), True, (255,255,255))
+        self.window.blit(score_text, (0, 0))
+    
         pygame.display.flip()
 
-
-    def display_score(self, x, y):
-        font = pygame.font.Font('freesansbold.ttf', 32)
-        score = font.render("Score: " + str(self.score), True, (255, 255, 255))
-        self.window.blit(score, (x, y))
-
-
-if __name__ == "__main__":
-    view = GameView()
-
-    while True:
-        view.display()
-        for event in pygame.event.get():
-            if event.type == pygame.locals.QUIT:
-                exit()
