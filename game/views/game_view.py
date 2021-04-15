@@ -16,7 +16,6 @@ class GameView:
         # Snake
         snake.group.draw(self.window)
 
-
         # Score
         font = pygame.font.SysFont('Ariel Rounded MT', 50)
         score_text = font.render("Score: " + str(score), True, (255,255,255))

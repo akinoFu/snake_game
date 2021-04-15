@@ -18,22 +18,16 @@ class Apple(pygame.sprite.Sprite):
 
     def apple_eaten(self, snake):
         """ Checks to see if snake head intercepts area of apple """
-        if pygame.sprite.spritecollide(self, snake, dokill=False):
+        if pygame.sprite.spritecollide(self, snake, dokill=True):
             self.rect.y = round(random.randrange(100, 650))
             self.rect.x = round(random.randrange(100, 650))
             return True
         return False
-    # def apple_eaten(self, snake):
-    #     """ Checks to see if snake head intercepts area of apple """
-    #     if self.rect.x <= snake[0] <= self.rect.x + 40 and self.rect.y <= snake[1] <= self.rect.y + 65:
-    #         self.rect.y = round(random.randrange(100, 650))
-    #         self.rect.x = round(random.randrange(100, 650))
-    #         return True
-    #     return False
+
 
     def overlap_poison_with_apple(self, poisons, group):
         """ Checks to see if poison position overlaps apple position and changes apple position if it does """
-        if pygame.sprite.spritecollide(self, poisons, dokill=False):
+        if pygame.sprite.spritecollide(self, group, dokill=True):
             if self.rect.x + 80 < 750:
                 self.rect.x += 80
             else:
@@ -49,10 +43,7 @@ class Apple(pygame.sprite.Sprite):
         overlapping = True
         while overlapping:
             # If the apple is in the snake range
-            if (snake['x_min'] <= self.rect.x <= snake['x_max'] and snake['y_min'] <= self.rect.y <= snake['y_max']) \
-            or (snake['x_min'] <= self.rect.x + 40 <= snake['x_max'] and snake['y_min'] <= self.rect.y <= snake['y_max']) \
-            or (snake['x_min'] <= self.rect.x <= snake['x_max'] and snake['y_min'] <= self.rect.y + 65 <= snake['y_max']) \
-            or (snake['x_min'] <= self.rect.x + 40 <= snake['x_max'] and snake['y_min'] <= self.rect.y + 65 <= snake['y_max']):
+            if pygame.sprite.spritecollide(self, snake, dokill=True):
             # checking the apple's coordinates to see if it overlaps with snake range
                 self.rect.y = round(random.randrange(100, 650))
                 self.rect.x = round(random.randrange(100, 650))
@@ -76,5 +67,5 @@ class Poison(pygame.sprite.Sprite):
 
     def poison_eaten(self, snake):
         """ Checks to see if snake's head overlaps with any part of poison's area """
-        if self.rect.x <= snake[0] <= self.rect.x + 40 and self.rect.y <= snake[1] <= self.rect.y + 65:
+        if pygame.sprite.spritecollide(self, snake, dokill=True):
             return True

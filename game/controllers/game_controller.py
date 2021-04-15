@@ -41,15 +41,17 @@ class GameController():
             # Apple
             apples = pygame.sprite.Group()
             apples.add(self.apple)
-            apples.draw(self.view.window)
+
 
             # Poison
             poisons = pygame.sprite.Group()
             poisons.add(self.poison)
-            poisons.draw(self.view.window)
+
 
             # Show the game screen
             self.view.display(self.snake, self.apple, self.poison, self.player.score)
+            apples.draw(self.view.window)
+            poisons.draw(self.view.window)
 
             # checking to see if snake has eaten apple
             eaten_apple = self.apple.apple_eaten(self.snake.group)
@@ -61,14 +63,14 @@ class GameController():
             # checking to see if new apple overlaps static poison
             check_poison_overlap_apple = self.apple.overlap_poison_with_apple(self.poison, poisons)
             # checking to see if new apple is placed under snake body, if it is, generate new apple
-            overlap_double_check_apple = self.apple.overlap_snake_new_apple(self.snake.range)
+            overlap_double_check_apple = self.apple.overlap_snake_new_apple(self.snake.group)
 
             # if new apple is still placed under snake body, generate new apple
             if overlap_double_check_apple == False:
-                overlap_double_check_apple = overlap_double_check_apple(self.apple.overlap_snake_new_apple(self.snake.range))
+                overlap_double_check_apple = overlap_double_check_apple(self.apple.overlap_snake_new_apple(self.snake.group))
 
             # checking to see if poison has been eaten by snake
-            overlap_snake = self.poison.poison_eaten(self.snake.head_position)
+            overlap_snake = self.poison.poison_eaten(self.snake.group)
             # if snake has eaten the poison
             if overlap_snake == True:
                 # Ask the player to continue
