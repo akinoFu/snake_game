@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 {% block main %}
-
-<table>
+<table class="table table-dark">
     <thead>
     <tr>
-        <th>Player Name</th>
-        <th>Score</th>
-        <th>Date</th>
+        <th scope="col">Player Name</th>
+        <th scope="col">Score</th>
+        <th scope="col">Date</th>
     </tr>
     </thead>
+    <tbody>
     {% for score in players %}
-        <tbody>
+    <tr>
                 <td> {{ score['name'] }} </td>
                 <td> {{ score['score'] }} </td>
                 <td> {{ score['time'] }} </td>
-        </tbody>
+    </tr>
         {% endfor %}
+    </tbody>
     </table>
 {% endblock %}

@@ -38,7 +38,7 @@ class GameController():
             # Show the game screen
             self.view.display(self.snake, self.apple, self.poison, self.player.score)
 
-            eaten_apple = self.apple.apple_eaten(self.snake.head_position)
+            eaten_apple = self.apple.apple_eaten(self.snake._head)
             if eaten_apple:
                 self.snake.add_body()
                 self.player.add_point()
