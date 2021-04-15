@@ -38,18 +38,28 @@ class GameController():
         while running:
             clock.tick(20)
 
+            # Apple
+            apples = pygame.sprite.Group()
+            apples.add(self.apple)
+            apples.draw(self.view.window)
+
+            # Poison
+            poisons = pygame.sprite.Group()
+            poisons.add(self.poison)
+            poisons.draw(self.view.window)
+
             # Show the game screen
             self.view.display(self.snake, self.apple, self.poison, self.player.score)
 
             # checking to see if snake has eaten apple
-            eaten_apple = self.apple.apple_eaten(self.snake._head)
+            eaten_apple = self.apple.apple_eaten(self.snake.group)
             # if apple has been eaten, generate new apple, make snake longer, and add a point to score
             if eaten_apple:
                 self.snake.add_body()
                 self.player.add_point()
             
             # checking to see if new apple overlaps static poison
-            check_poison_overlap_apple = self.apple.overlap_poison_with_apple(self.poison)
+            check_poison_overlap_apple = self.apple.overlap_poison_with_apple(self.poison, poisons)
             # checking to see if new apple is placed under snake body, if it is, generate new apple
             overlap_double_check_apple = self.apple.overlap_snake_new_apple(self.snake.range)
 
