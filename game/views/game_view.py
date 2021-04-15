@@ -1,32 +1,47 @@
 import pygame
+from models.player import Player
 
 class GameView:
-    def __init__(self, snake):
+    def __init__(self):
         pygame.init()
         pygame.font.init()
         self.window = pygame.display.set_mode((800, 800))
-        self.snake = snake
-        self.window.fill((46,139,87))
+        self.surface = pygame.Surface((800,800))
+        
 
-    def display(self):
-        self.window.fill((46,139,87))
-        for part in self.snake.full_body:
-             self.window.blit(part.surface, (part.x, part.y))
 
+    def display(self, snake, apple, poison, score):
+        """ Show the game screen and objects """
+        self.surface.fill((46,139,87))
+
+        # Snake
+        for part in snake.full_body:
+            pygame.draw.rect(self.surface, (255, 241, 0), part.rect)
+    
+        # Snake's eyes
+        pygame.draw.circle(self.surface, (1, 1, 1), snake.eyes_pos[0], 4)
+        pygame.draw.circle(self.surface, (1, 1, 1), snake.eyes_pos[1], 4)
+        self.window.blit(self.surface.convert(), (0, 0))
+
+        # Apple
+        apples = pygame.sprite.Group()
+        apples.add(apple)
+        
+        # Poison
+        poisons = pygame.sprite.Group()
+        poisons.add(poison)
+
+        apples.draw(self.window)
+        poisons.draw(self.window)
+
+        # Score
+        font = pygame.font.SysFont('Ariel Rounded MT', 50)
+        score_text = font.render(str(score), True, (255,255,255))
+        self.window.blit(score_text, (10, 10))
+    
         pygame.display.flip()
 
 
-    def display_score(self, x, y):
-        font = pygame.font.Font('freesansbold.ttf', 32)
-        score = font.render("Score: " + str(self.score), True, (255, 255, 255))
-        self.window.blit(score, (x, y))
 
 
-if __name__ == "__main__":
-    view = GameView()
 
-    while True:
-        view.display()
-        for event in pygame.event.get():
-            if event.type == pygame.locals.QUIT:
-                exit()

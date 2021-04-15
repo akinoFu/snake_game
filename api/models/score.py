@@ -45,5 +45,3 @@ class Score:
 
         # Creates an instance of the same class
         return cls(identifier=data["identifier"], name=data["name"], score=data["score"], time=data["time"])
-
-

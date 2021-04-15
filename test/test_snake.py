@@ -1,5 +1,5 @@
 import pytest
-from game.models.snake import Snake, SnakeBody, SnakeHead, SnakePart
+from game.models.snake import Snake, SnakePart
 
 @pytest.fixture
 def snake():
@@ -29,12 +29,12 @@ def test_move_left(snake):
     snake.move()
     assert snake._head.x == 480
     assert snake._head.y == 500
-    assert snake._body1.x == 500
-    assert snake._body1.y == 500
-    assert snake._body2.x == 520
-    assert snake._body2.y == 500
-    assert snake._body3.x == 540
-    assert snake._body3.y == 500
+    assert snake.full_body[1].x == 500
+    assert snake.full_body[1].y == 500
+    assert snake.full_body[2].x == 520
+    assert snake.full_body[2].y == 500
+    assert snake.full_body[3].x == 540
+    assert snake.full_body[3].y == 500
 
 def test_move_up(snake):
     """ Test move method (Up) """
@@ -42,12 +42,12 @@ def test_move_up(snake):
     snake.move()
     assert snake._head.x == 500
     assert snake._head.y == 480
-    assert snake._body1.x == 500
-    assert snake._body1.y == 500
-    assert snake._body2.x == 520
-    assert snake._body2.y == 500
-    assert snake._body3.x == 540
-    assert snake._body3.y == 500
+    assert snake.full_body[1].x == 500
+    assert snake.full_body[1].y == 500
+    assert snake.full_body[2].x == 520
+    assert snake.full_body[2].y == 500
+    assert snake.full_body[3].x == 540
+    assert snake.full_body[3].y == 500
 
 def test_move_down(snake):
     """ Test move method (Down) """
@@ -55,12 +55,12 @@ def test_move_down(snake):
     snake.move()
     assert snake._head.x == 500
     assert snake._head.y == 520
-    assert snake._body1.x == 500
-    assert snake._body1.y == 500
-    assert snake._body2.x == 520
-    assert snake._body2.y == 500
-    assert snake._body3.x == 540
-    assert snake._body3.y == 500
+    assert snake.full_body[1].x == 500
+    assert snake.full_body[1].y == 500
+    assert snake.full_body[2].x == 520
+    assert snake.full_body[2].y == 500
+    assert snake.full_body[3].x == 540
+    assert snake.full_body[3].y == 500
 
 
 def test_move_right(snake):
@@ -69,12 +69,12 @@ def test_move_right(snake):
     snake.move()
     assert snake._head.x == 520
     assert snake._head.y == 500
-    assert snake._body1.x == 500
-    assert snake._body1.y == 500
-    assert snake._body2.x == 520
-    assert snake._body2.y == 500
-    assert snake._body3.x == 540
-    assert snake._body3.y == 500
+    assert snake.full_body[1].x == 500
+    assert snake.full_body[1].y == 500
+    assert snake.full_body[2].x == 520
+    assert snake.full_body[2].y == 500
+    assert snake.full_body[3].x == 540
+    assert snake.full_body[3].y == 500
 
 def test_turn_Up(snake):
     """ Test turn method (Up) """
@@ -85,15 +85,7 @@ def test_add_body(snake):
     """ Test add_body method """
     snake.add_body()
     assert len(snake.full_body) == 5
-    assert isinstance(snake.full_body[4], SnakeBody)
     assert snake.full_body[4].x == snake.full_body[3].x + snake._size
     assert snake.full_body[4].y == snake.full_body[3].y
 
-def test_inheritance(snake):
-    """ Test the inheritance """
-    for part in snake.full_body:
-        assert isinstance(part, SnakePart)
-    assert isinstance(snake.full_body[0], SnakeHead)
-    assert isinstance(snake.full_body[1], SnakeBody)
-    assert isinstance(snake.full_body[2], SnakeBody)
-    assert isinstance(snake.full_body[3], SnakeBody)
+
