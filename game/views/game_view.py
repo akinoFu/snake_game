@@ -16,15 +16,6 @@ class GameView:
         # Snake
         snake.group.draw(self.window)
 
-        # Apple
-        apples = pygame.sprite.Group()
-        apples.add(apple)
-        apples.draw(self.window)
-
-        # Poison
-        poisons = pygame.sprite.Group()
-        poisons.add(poison)
-        poisons.draw(self.window)
 
         # Score
         font = pygame.font.SysFont('Ariel Rounded MT', 50)

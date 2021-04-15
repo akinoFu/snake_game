@@ -23,7 +23,7 @@ class Snake:
 
     @property
     def head_position(self):
-        """ Retur x and y of the head """
+        """ Return x and y of the head """
         return [self._head.rect.x, self._head.rect.y]
 
     @property

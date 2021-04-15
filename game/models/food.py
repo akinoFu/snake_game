@@ -18,7 +18,7 @@ class Apple(pygame.sprite.Sprite):
 
     def apple_eaten(self, snake):
         """ Checks to see if snake head intercepts area of apple """
-        if self.rect.colliderect(snake.rect):
+        if pygame.sprite.spritecollide(self, snake, dokill=False):
             self.rect.y = round(random.randrange(100, 650))
             self.rect.x = round(random.randrange(100, 650))
             return True
@@ -31,9 +31,9 @@ class Apple(pygame.sprite.Sprite):
     #         return True
     #     return False
 
-    def overlap_poison_with_apple(self, poison):
+    def overlap_poison_with_apple(self, poisons, group):
         """ Checks to see if poison position overlaps apple position and changes apple position if it does """
-        if self.rect.colliderect(poison.rect):
+        if pygame.sprite.spritecollide(self, poisons, dokill=False):
             if self.rect.x + 80 < 750:
                 self.rect.x += 80
             else:
