@@ -1,28 +1,25 @@
 import random
 import pygame
 
-
 class Snake:
     def __init__(self):
         self._size = 20
-        self._head = SnakeHead(500, 500, self._size)
-        self._body1 = SnakeBody(self._head.x + self._size, self._head.y, self._size)
-        self._body2 = SnakeBody(self._body1.x + self._size, self._head.y, self._size)
-        self._body3 = SnakeBody(self._body2.x + self._size, self._head.y, self._size)
-        # self._body4 = SnakeBody(self._body3.x + self._size, self._head.y, self._size)
-        # self._body5 = SnakeBody(self._body4.x + self._size, self._head.y, self._size)
-        # self._body6 = SnakeBody(self._body5.x + self._size, self._head.y, self._size)
-        self.full_body = [self._head, self._body1, self._body2, self._body3]
+        self._head = SnakePart(500, 500, self._size)
+        self.full_body = [self._head,
+                          SnakePart(self._head.x + self._size, self._head.y, self._size),
+                          SnakePart(self._head.x + self._size * 2, self._head.y, self._size),
+                          SnakePart(self._head.x + self._size * 3, self._head.y, self._size)
+                        ]
         self.direction = "Left"
-        # self.score = 0
 
     @property
     def head_position(self):
+        """ Retur x and y of the head """
         return [self._head.x, self._head.y]
-
 
     @property
     def range(self):
+        """ Return max and min coordinates of the whole body """
         x_min = 1000
         y_min = 1000
         x_max = 0
@@ -38,37 +35,60 @@ class Snake:
                 y_max = part.y
         return {"x_min": x_min, "x_max": x_max + self._size, "y_min": y_min, "y_max": y_max + self._size}
 
+    @property
+    def eyes_pos(self):
+        """ Return list of tuples that represent eyes' coordinates """
+        if self.direction == "Left":
+            return [(self._head.x + 5, self._head.y + 5),
+                    (self._head.x + 5, self._head.y + 15)]
+        elif self.direction == "Right":
+            return [(self._head.x + 15, self._head.y + 5),
+                    (self._head.x + 15, self._head.y + 15)]
+        elif self.direction == "Up":
+            return [(self._head.x + 5, self._head.y + 5),
+                    (self._head.x + 15, self._head.y + 5)]
+        else:
+            return [(self._head.x + 5, self._head.y + 15),
+                    (self._head.x + 15, self._head.y + 15)]
 
     def move(self):
         """ Move the snake"""
+        # Create new body
+        new_body = list()
+        
+        # Add new body parts with new x and y
         l = len(self.full_body)
         for i, part in enumerate(reversed(self.full_body)):
             if i+1 < l:
-                part.x = self.full_body[l-i-2].x
-                part.y = self.full_body[l-i-2].y
+                part = SnakePart(self.full_body[l-i-2].x, self.full_body[l-i-2].y, self._size)
+                new_body.insert(0, part)
 
-        self._body1.x = self._head.x
-        self._body1.y = self._head.y
-
+        # Add new head
+        head_x = self._head.x
+        head_y = self._head.y        
         if self.direction == "Up":
-            self._head.y -= self._size
+            head_y -= self._size
         elif self.direction == "Down":
-            self._head.y += self._size
+            head_y += self._size
         elif self.direction == "Right":
-            self._head.x += self._size
+            head_x += self._size
         elif self.direction == "Left":
-            self._head.x -= self._size
-    
+            head_x -= self._size
+
+        self._head = SnakePart(head_x, head_y, self._size)
+        new_body.insert(0, self._head)
+
+        # Replace the full body with new body
+        self.full_body = new_body
+
     def turn(self, direction):
         """ Change the direction """
         # Set new direction
         self.direction = direction
-        # Rotate the head
-        self._head.rotate(self.direction)
     
     def add_body(self):
         """ Make the snake longer """
-        new_part = SnakeBody(self.full_body[-1].x + self._size,
+        new_part = SnakePart(self.full_body[-1].x + self._size,
                              self.full_body[-1].y,
                              self._size)
         self.full_body.append(new_part)
@@ -84,36 +104,9 @@ class Snake:
 
 
 class SnakePart:
+    """ Each segment of the snake's body """
     def __init__(self, x, y, size):
-        self._size = size
         self.x = x
         self.y = y
-        self.surface = pygame.Surface((self._size, self._size))
-        
+        self.rect = pygame.Rect(self.x, self.y, size, size)
 
-class SnakeHead(SnakePart):
-    def __init__(self, x, y, size):
-        super().__init__(x, y, size)
-        self.rotate("Left")
-    
-    def rotate(self, direction):
-        """ Change the position of the eyes according to the direction """
-        self.surface.fill((255, 241, 0))
-        if direction == "Left":
-            pygame.draw.circle(self.surface, (1, 1, 1),(self._size/2,5), 4)
-            pygame.draw.circle(self.surface, (1, 1, 1),(self._size/2,15), 4)
-        elif direction == "Right":
-            pygame.draw.circle(self.surface, (1, 1, 1),(self._size/2,5), 4)
-            pygame.draw.circle(self.surface, (1, 1, 1),(self._size/2,15), 4)
-        elif direction == "Up":
-            pygame.draw.circle(self.surface, (1, 1, 1),(5, self._size/2), 4)
-            pygame.draw.circle(self.surface, (1, 1, 1),(15, self._size/2), 4)
-        else:
-            pygame.draw.circle(self.surface, (1, 1, 1),(5, self._size/2), 4)
-            pygame.draw.circle(self.surface, (1, 1, 1),(15, self._size/2), 4)
-
-
-class SnakeBody(SnakePart):
-    def __init__(self, x, y, size):
-        super().__init__(x, y, size)
-        self.surface.fill((255, 241, 0))

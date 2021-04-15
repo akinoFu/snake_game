@@ -6,16 +6,22 @@ class GameView:
         pygame.init()
         pygame.font.init()
         self.window = pygame.display.set_mode((800, 800))
-        self.window.fill((46,139,87))
+        self.surface = pygame.Surface((800,800))
+        
 
 
     def display(self, snake, apple, poison, score):
         """ Show the game screen and objects """
-        self.window.fill((46,139,87))
+        self.surface.fill((46,139,87))
 
         # Snake
         for part in snake.full_body:
-             self.window.blit(part.surface, (part.x, part.y))
+            pygame.draw.rect(self.surface, (255, 241, 0), part.rect)
+    
+        # Snake's eyes
+        pygame.draw.circle(self.surface, (1, 1, 1), snake.eyes_pos[0], 4)
+        pygame.draw.circle(self.surface, (1, 1, 1), snake.eyes_pos[1], 4)
+        self.window.blit(self.surface.convert(), (0, 0))
 
         # Apple
         apples = pygame.sprite.Group()
