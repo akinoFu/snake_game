@@ -3,6 +3,7 @@ import pygame
 
 class Snake:
     def __init__(self):
+        """ Snake Class that builds and moves the snake """
         self._size = 20
         self._head = SnakePart(500, 500, self._size)
         self.full_body = [self._head,
