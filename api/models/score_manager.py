@@ -2,6 +2,7 @@ import json
 import os
 import datetime
 import requests
+from operator import itemgetter
 
 from .score import Score
 
@@ -42,7 +43,9 @@ class ScoreManager:
     def get_all_scores(self):
         """ Get all the data using api """
         r = requests.get(f"http://localhost:5000/api/scores")
-        return r.json()
+        new = r.json()
+        new_dict = sorted(new, key=itemgetter('score'), reverse=True)
+        return new_dict
     
     def save(self):
         """ Serializes the list of scores and saves to a JSON file """
