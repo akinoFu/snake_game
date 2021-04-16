@@ -27,7 +27,7 @@ class Apple(pygame.sprite.Sprite):
 
     def overlap_poison_with_apple(self, poisons, group):
         """ Checks to see if poison position overlaps apple position and changes apple position if it does """
-        if pygame.sprite.spritecollide(self, group, dokill=True):
+        if pygame.sprite.spritecollide(self, group, dokill=False):
             if self.rect.x + 80 < 750:
                 self.rect.x += 80
             else:
@@ -43,7 +43,7 @@ class Apple(pygame.sprite.Sprite):
         overlapping = True
         while overlapping:
             # If the apple is in the snake range
-            if pygame.sprite.spritecollide(self, snake, dokill=True):
+            if pygame.sprite.spritecollide(self, snake, dokill=False):
             # checking the apple's coordinates to see if it overlaps with snake range
                 self.rect.y = round(random.randrange(100, 650))
                 self.rect.x = round(random.randrange(100, 650))
