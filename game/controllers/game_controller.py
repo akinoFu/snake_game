@@ -61,11 +61,7 @@ class GameController():
             # checking to see if new apple overlaps static poison
             self.apple.overlap_poison_with_apple(self.poison, poisons)
             # checking to see if new apple is placed under snake body, if it is, generate new apple
-            overlap_double_check_apple = self.apple.overlap_snake_new_apple(self.snake.group)
-
-            # if new apple is still placed under snake body, generate new apple
-            if overlap_double_check_apple == False:
-                overlap_double_check_apple = overlap_double_check_apple(self.apple.overlap_snake_new_apple(self.snake.group))
+            self.apple.overlap_snake_new_apple(self.snake.group)
 
             # checking to see if poison has been eaten by snake
             overlap_snake = self.poison.poison_eaten(self.snake.group)
