@@ -118,6 +118,7 @@ class GameController():
         if game_continue:
             self.snake = Snake()
             self.view = GameView()
+            self.player.score = 0
             return True
         else:
             return False
