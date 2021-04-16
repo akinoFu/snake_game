@@ -42,14 +42,12 @@ class GameController():
             apples = pygame.sprite.Group()
             apples.add(self.apple)
 
-
             # Poison
             poisons = pygame.sprite.Group()
             poisons.add(self.poison)
 
-
             # Show the game screen
-            self.view.display(self.snake, self.apple, self.poison, self.player.score)
+            self.view.display(self.snake, self.player.score)
             apples.draw(self.view.window)
             poisons.draw(self.view.window)
 
@@ -111,13 +109,15 @@ class GameController():
         Send the score to the server, and ask the player to continue
         """
         # Send the score to the server
-        self.player.post_score()
+        post_result = self.player.post_score()
         # Show the gameover screen
-        game_continue = self.gameover.run(self.view.window, self.player)
-        # If restarting the game, recreate snake and gameview
+        game_continue = self.gameover.run(self.view.window, self.player, post_result)
+        # If restarting the game
         if game_continue:
+            # Recreate the snake and gameview
             self.snake = Snake()
             self.view = GameView()
+            # Reset the score
             self.player.score = 0
             return True
         else:

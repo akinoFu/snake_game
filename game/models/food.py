@@ -51,8 +51,6 @@ class Apple(pygame.sprite.Sprite):
                 overlapping = False
 
 
-
-
 class Poison(pygame.sprite.Sprite):
     """ Poison class that defines Snake's food that kills it """
     def __init__(self):
