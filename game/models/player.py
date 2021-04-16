@@ -16,5 +16,9 @@ class Player():
     def post_score(self):
         """ posts score at the end of each game """
         API_URL = "http://localhost:5000/api"
-        r = requests.post(f"{API_URL}/score", json={"name": self.name, "score": self.score})
+        try:
+            r = requests.post(f"{API_URL}/score", json={"name": self.name, "score": self.score})
+            return r
+        except:
+            return False
 

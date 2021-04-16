@@ -6,14 +6,13 @@ from views.game_over_view import GameOverView
 class GameOverController():
     """ Controller to manage the game over screen """
 
-    def run(self, window, player):
+    def run(self, window, player, post_result):
         """ Show the game over screen """
         view = GameOverView(window)
-        # view.display(player)
 
         displaying = True
         while displaying:
-            view.display(player)
+            view.display(player, post_result)
             
             for event in pygame.event.get():
                 # Window close button
@@ -38,8 +37,20 @@ class GameOverController():
                         displaying = False
                         return False
                 
-                # Mouseover
+                # Mouseover the score board
                 if view.scoreboard_rect.collidepoint(pygame.mouse.get_pos()):
                     view.link_active = True
                 else:
                     view.link_active = False
+
+                # Mouseover the continue button
+                if view.btn_continue.collidepoint(pygame.mouse.get_pos()):
+                    view.btn_continue_active = True
+                else:
+                    view.btn_continue_active = False
+            
+                # Mouseover the end button
+                if view.btn_end.collidepoint(pygame.mouse.get_pos()):
+                    view.btn_end_active = True
+                else:
+                    view.btn_end_active = False

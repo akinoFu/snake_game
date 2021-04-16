@@ -9,7 +9,7 @@ class GameView:
         self.window = pygame.display.set_mode((800, 800))
 
 
-    def display(self, snake, apple, poison, score):
+    def display(self, snake, score):
         """ Show the game screen and objects """
         self.window.fill((46,139,87))
 

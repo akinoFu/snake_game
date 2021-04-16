@@ -14,6 +14,7 @@ class Snake:
         self._group = pygame.sprite.Group()
         self.direction = "Left"
 
+
     @property
     def group(self):
         """ Return the sprite group """
@@ -21,6 +22,7 @@ class Snake:
         for part in self.full_body:
             self._group.add(part)
         return self._group
+
 
     def move(self):
         """ Move the snake"""
@@ -52,17 +54,20 @@ class Snake:
         # Replace the full body with new body
         self.full_body = new_body
 
+
     def turn(self, direction):
         """ Change the direction """
         # Set new direction
         self.direction = direction
-    
+
+
     def add_body(self):
         """ Make the snake longer """
         new_part = SnakePart(self.full_body[-1].rect.x + self._size,
                              self.full_body[-1].rect.y,
                              self._size)
         self.full_body.append(new_part)
+
 
     def check_hit_wall(self, window):
         """ Check if the snake hits one of the four sides """
